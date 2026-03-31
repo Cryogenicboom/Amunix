@@ -83,6 +83,9 @@ int main(){
         std::cout<<"guest/home:user$ ";
         std::string expression;
         std::getline(std::cin, expression);
+        if(expression == "quit"){
+            return 0;
+        }
         int result = parsing(expression);
 
         std::cout<<result;
