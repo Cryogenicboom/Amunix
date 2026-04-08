@@ -24,17 +24,35 @@ void header(){
     printf("\nAMUIX is an another shell in this open source world. It is used to study the shell development and operating system working. Refer to this repo 'https://github.com/Cryogenicboom/User-Simulated-Virtual-OS' where we are simulating the operating system.\n\n");
 }
 
+// void parser_for_quotes(char * cmds[], char * parsed_cmds[]){
+//     int i = 0;
+//     int j = 0;
+//     while(cmds[i] != NULL){
+//         if(cmds[i][j] == '"'){
+//             cmds[1]   
+//         }
+//     }
+
+// }
+
+
 int main(){
     header();
     while(1){
         char user_input[100];
         char deli[] = " \t";  // delimeter are single space or multiple spaces (tab)
-        char *cmds[30];
-        printf("User@system:~$");
+        char *cmds[300]; //these commands are tokenized only
+        char *parsed_cmds[100]; // these commands are parsed matlab, [ERROR 4 in diary]
+
+        char pwd[100];
+        if(getcwd(pwd, sizeof(pwd)) != NULL){
+            printf("User@system:%s $", pwd);
+        }
+        // printf("User@system:~$");
         fgets(user_input, sizeof(user_input), stdin);
-        
         user_input[strcspn(user_input, "\n")] = '\0';
 
+        // =================================== TOKENIZE ==================================
         char * tokenptr = strtok(user_input, deli);
         int i = 0;
         while(tokenptr != NULL){
@@ -44,6 +62,25 @@ int main(){
             i++;
         }
         cmds[i] = NULL; // add NULL at the end of command to let know other shell (execvp) this command has terminated.
+
+
+        if(cmds[0] == NULL) continue;
+        // ========================================BUILT IN CMDS: ========================================
+        if(strcmp(cmds[0], "dirbadlo") == 0){
+            if(chdir(cmds[1]) == -1){
+                perror("dirbadlo failed");
+            }
+            // else if(cmds[1] == NULL){
+            //     continue;
+            // }
+            continue;
+        }
+
+
+
+
+
+        // ================================= External Cmds: ============================================ 
 
         // if user empty enter then continue
         if( cmds[0] == NULL){
