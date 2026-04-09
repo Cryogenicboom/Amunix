@@ -1,6 +1,6 @@
 This is documentation for AMUNIX specifically covers "main.c" architecture and working. For installation refer to the README.md {link readme.md} here.
 
-<p>
+
         .o.       ooo        ooooo ooooo     ooo  oooo        oooo  ooooo ooooooo  ooooo<br>
        .888.      `88.       .888' `888'     `8'   `88         88   `888`  `8888    d8'<br>
       .8\"888.     888b     d'888   888       8     888b       88    888     Y888..8P<br>
@@ -8,7 +8,7 @@ This is documentation for AMUNIX specifically covers "main.c" architecture and w
     .88ooo8888.    8  `888'   888   888       8     8  `888'   88    888     .8PY888.<br>
    .8'     `888.   8    Y     888   `88.    .8'     8    Y888 .88    888     d8'  `888b<br>
   o88o     o8888o o8o        o888o    `YbodP'      o8o      88888o  o888o oo888o  o88888o <br>
-</p>
+
 <br>
 *Yes this ASCII title was way harder than making the Shell.
 <br>
