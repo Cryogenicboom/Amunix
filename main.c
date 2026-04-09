@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <string.h> // to be only used for strtok()
-#include <unistd.h> // used for system calls POSIX 
+#include <string.h>             // to be only used for strtok()
+#include <unistd.h>             // used for system calls POSIX 
 #include <sys/wait.h>
 
 void header(){  
@@ -26,64 +26,67 @@ void header(){
 
                                                                                              
 
-void parser_for_quotes(char * cmds[], char * parsed_cmds[]){
-    
-    int i = 0, j = 0;
-
-    while(cmds[i] != NULL){
-
-        if(cmds[i][0] == '"'){
+void parser_for_quotes(char * cmds[], char * parsed_cmds[])
+{
+    int i = 0, j = 0;    
+    while(cmds[i] != NULL)
+    {
+        if(cmds[i][0] == '"')
+        {
             char temp[200];
             temp[0] = '\0';
             strcat(temp, cmds[i]+1);
-            while(cmds[i][strlen(cmds[i]) -1] != '"'){
+            while(cmds[i][strlen(cmds[i]) -1] != '"')   // check every 2nd letter of each index to be '"' or not.    
+            {          
                 strcat(temp, " ");
                 i += 1;
                 strcat(temp, cmds[i]);
             }
+
             int temp_len = strlen(temp);
-            temp[temp_len - 1] = '\0';
+            temp[temp_len - 1] = '\0';              // replace the ending quote with null terminator.
 
             parsed_cmds[j] = strdup(temp);
             j += 1;
             i += 1;
-        }else{
+        }
+        else
+        {
             parsed_cmds[j] = cmds[i];
             j += 1;
             i += 1;
         }
-        
-        
     }
     parsed_cmds[j] = NULL;
 }
 
 
-int main(){
+int main()
+{
     header();
-    while(1){
+    while(1)
+    {
         char user_input[100];
-        char deli[] = " \t";  // delimeter are single space or multiple spaces (tab)
-        char *cmds[300]; //these commands are tokenized only
-        char *parsed_cmds[100]; // these commands are parsed matlab, [ERROR 4 in diary]
-
+        char deli[] = " \t";                    // delimeter are single space or multiple spaces (tab)
+        char *cmds[300];                        //these commands are tokenized only
+        char *parsed_cmds[100];                 // these commands are parsed matlab, [ERROR 4 in diary]
         char pwd[100];
-        if(getcwd(pwd, sizeof(pwd)) != NULL){
+
+        if(getcwd(pwd, sizeof(pwd)) != NULL)
+        {
             printf("User@system:%s $", pwd);
         }
-        // printf("User@system:~$");
+
         fgets(user_input, sizeof(user_input), stdin);
         user_input[strcspn(user_input, "\n")] = '\0';
 
-
-
-
         // =================================== TOKENIZE ==================================
+
         char * tokenptr = strtok(user_input, deli);
         int i = 0;
-        while(tokenptr != NULL){
-            cmds[i] = tokenptr; // kept at top to store the first token generated outside the while loop
-            // printf("arg[%d] = %s\n", i, tokenptr);
+        while(tokenptr != NULL)
+        {
+            cmds[i] = tokenptr;                         // kept at top to store the first token generated outside the while loop
             tokenptr = strtok(NULL, deli);
             i++;
         }
@@ -91,40 +94,45 @@ int main(){
 
 
         if(cmds[0] == NULL) continue;
-        else{
+        else
+        {
             parser_for_quotes(cmds, parsed_cmds);
         }
 
         // ========================================BUILT IN CMDS: ========================================
-        if(strcmp(parsed_cmds[0], "dirbadlo") == 0){
+        if(strcmp(parsed_cmds[0], "dirbadlo") == 0)
+        {
             printf("DEBUG: [%s, %s, %s]\n", parsed_cmds[0], parsed_cmds[1], parsed_cmds[2]);
-            if(chdir(parsed_cmds[1]) == -1){
+            if(chdir(parsed_cmds[1]) == -1)
+            {
                 perror("dirbadlo failed");
             }
-            // else if(cmds[1] == NULL){
-            //     continue;
-            // }
             continue;
         }
 
-        // ================================= External Cmds: ============================================ 
+        // ================================= External Cmds: ==========================================
 
         // if user empty enter then continue
-        if( cmds[0] == NULL){
+        if( cmds[0] == NULL)
+        {
             continue;
         }
         
         pid_t pid = fork();
 
-        if(pid == 0){
-            execvp(parsed_cmds[0], parsed_cmds); // cmds[0] --> first line always have the command name later part contains arguments, flags etc.
+        if(pid == 0)
+        {
+            execvp(parsed_cmds[0], parsed_cmds);            // cmds[0] --> first line always have the command name later part contains arguments, flags etc.
             printf("\n");
-        } else if(pid > 0){
+        } 
+        else if(pid > 0)
+        {
             wait(NULL);
-        } else{
+        } 
+        else
+        {
             printf("error, fork failed");
         }
-    
     }
     return 0;
 }   
