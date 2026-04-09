@@ -33,11 +33,11 @@ Right now, this shell has nothing to do with Networks but it could help you too 
 ### 1.0 Input and command prompt
 - Take input in array `char user_input[100]` and tokenize it in another array `char *cmds[300];` with delimeter `space " " and a tab space "\t"`
 - [getcwd](https://man7.org/linux/man-pages/man3/getcwd.3.html) for dynamic command prompt which returns the null terminated string containing your pathname to your current directory. 
-> `
+> ```
 > if(getcwd(pwd, sizeof(pwd)) != NULL){
 >             printf("User@system:%s $", pwd);
 >         }
->  ` 
+> ```
 
 ---
 
@@ -45,8 +45,8 @@ Right now, this shell has nothing to do with Networks but it could help you too 
 - One problem that i encountered was tokenizing a directory name which contains spaces, for example "MY FOLDER".
 - using [strtok()](https://cplusplus.com/reference/cstring/strtok/) tokenizes the `user_input` in array of strings, replacing every delimeter by a null terminater. Therefore we establish a rule in our shell that if any single entity contains a whitespace in them, it has to be enclosed in double quotes.
 - so when we encounter a double quotes, we parse it manually, starts concatinating strings in a buffer array until end of quotes, and then duplicate the buffer_array_element into `char * parsed_cmds[100]`
-> `
-> if(cmds[i][0] == '"'){
+> ```
+> if(cmds[i][0] == '"'){ 
 >    char temp[200];
 >    temp[0] = '\0';
 >    strcat(temp, cmds[i]+1);
@@ -61,8 +61,8 @@ Right now, this shell has nothing to do with Networks but it could help you too 
 >    j += 1;
 >    i += 1;
 > }
-> `
- 
+> ```
+
 
 
 
