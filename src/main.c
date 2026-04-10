@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 
 #include "parser.h"
+#include "tokenizer.h"
 
 void header(){  
 
@@ -33,9 +34,9 @@ int main()
     while(1)
     {
         char user_input[100];
-        char deli[] = " \t";                    // delimeter are single space or multiple spaces (tab)
+        // char deli[] = " \t";                    // delimeter are single space or multiple spaces (tab)
         char *cmds[300];                        //these commands are tokenized only
-        char *parsed_cmds[100];                 // these commands are parsed matlab, [ERROR 4 in diary]
+        char *parsed_cmds[300];                 // these commands are parsed matlab, [ERROR 4 in diary]
         char pwd[100];
 
         if(getcwd(pwd, sizeof(pwd)) != NULL)
@@ -48,22 +49,8 @@ int main()
 
         // =================================== TOKENIZE ==================================
 
-        char * tokenptr = strtok(user_input, deli);
-        int i = 0;
-        while(tokenptr != NULL)
-        {
-            cmds[i] = tokenptr;                         // kept at top to store the first token generated outside the while loop
-            tokenptr = strtok(NULL, deli);
-            i++;
-        }
-        cmds[i] = NULL; // add NULL at the end of command to let know other shell (execvp) this command has terminated.
-
-
-        if(cmds[0] == NULL) continue;
-        else
-        {
-            parser_for_quotes(cmds, parsed_cmds);
-        }
+        tokenize(user_input, cmds, parsed_cmds);
+        
 
         // ========================================BUILT IN CMDS: ========================================
         if(strcmp(parsed_cmds[0], "dirbadlo") == 0)
@@ -83,7 +70,7 @@ int main()
         // ================================= External Cmds: ==========================================
 
         // if user empty enter then continue
-        if( cmds[0] == NULL)
+        if(parsed_cmds[0] == NULL)
         {
             continue;
         }

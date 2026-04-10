@@ -2,6 +2,7 @@
 #include <string.h>             // to be only used for strtok()
 #include <unistd.h>             // used for system calls POSIX 
 #include <sys/wait.h>
+#include "tokenizer.h"
 
 void parser_for_quotes(char * cmds[], char * parsed_cmds[])
 {
