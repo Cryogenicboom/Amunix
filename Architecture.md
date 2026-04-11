@@ -10,15 +10,15 @@ This is documentation for AMUNIX specifically covers "main.c" architecture and w
   o88o     o8888o o8o        o888o    `YbodP'      o8o      88888o  o888o oo888o  o88888o 
 ```
 <br>
+###### Yes this ASCII title was way harder than making the Shell.
+
+<br> 
 
 ## Another open shell in this open source world.
 
 <br>
-
-###### Yes this ASCII title was way harder than making the Shell.
 <br>
 
-<br>
 <p> 
 This is a hobby project of mine, i was really fascinated by Linux when playing BANDIT on my WSL. This made me learn more about Computer Networks and low level systems. Networking was not only about connecting your system to another system, but your system also uses Transmission Control Protocol (TCP) to ensure the reliablity of communication inside the system itself.
 </p>
