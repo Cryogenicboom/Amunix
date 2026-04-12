@@ -44,7 +44,7 @@ Right now, this shell has nothing to do with Networks but it could help you too 
 ## SYSTEM COMMAND
 | Feature            | Syntax Example              | Description |
 |-------------------|----------------------------|-------------|
-| External Commands | `ls -l`, `pwd`, `echo hi`  | Executed using `fork()` + `execvp()` :contentReference[oaicite:0]{index=0} |
+| External Commands | `ls -l`, `pwd`, `echo hi`  | Executed using `fork()` + `execvp()`  |
 | Argument Passing  | `ls -l /home`              | Arguments are passed as `char* argv[]` to `execvp()` |
 | Process Handling  | (implicit)                 | Parent waits for child using `wait()` after execution |
 
