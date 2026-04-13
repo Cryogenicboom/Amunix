@@ -1,13 +1,13 @@
 This is documentation for AMUNIX will cover Amunix commands and related. To learn about the working and internal structure you can refer to [Architecture.md](https://github.com/Cryogenicboom/Amunix/blob/main/Architecture.md), this is my personal documentation i am making as i am learning. 
 
-## to run the shell 
+## To run the shell 
 1. Fork this repo and install it on your system.
 2. Create a new folder named "AMUNIX" and unzip the downlaoded folder here. 
 2. open terminal (WIN+R --> cmd --> enter), and in terminal itself, go to the AMUNIX folder where you have extracted the shell contents.
 3. `gcc src/main.c src/parser/parser.c src/parser/tokenizer.c -o executable -Iinclude`
 4. `gnome-terminal -- ./executable`
 5. if gnome is not downlaoded --> `sudo apt install gnome-terminal` write this in terminal and run.
-
+6. `ctrl+C` to exit ( due to in development you cannot use `bahar` command )
 
 
 ## See detailed documentation here:  

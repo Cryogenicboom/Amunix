@@ -7,6 +7,7 @@
 #include "parser.h"
 #include "tokenizer.h"
 #include "command.h"
+#include "executor.h"
 
 void header(){  
 
@@ -132,29 +133,15 @@ int main()
             }
             continue;
         }
-        else if (strcmp(parsed_cmds[0], "bahar") == 0)
+        else if (strcmp(parsed_cmds[0], "annt") == 0)
         {
             exit(EXIT_SUCCESS);
         }
 
-
         // ================================= External Cmds: ==========================================
         
-        pid_t pid = fork();
-
-        if(pid == 0)
-        {
-            execvp(cmd.simpleCommands[0].argv[0], cmd.simpleCommands[0].argv);            // cmds[0] --> first line always have the command name later part contains arguments, flags etc.
-            printf("\n");
-        } 
-        else if(pid > 0)
-        {
-            wait(NULL);
-        } 
-        else
-        {
-            printf("error, fork failed");
-        }
+        execute_command(&cmd, cmd_count);
+         
     }
     return 0;
 }   
