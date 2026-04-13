@@ -112,7 +112,6 @@ int main()
             }
             printf("\n");
         }
-        
 
         if(parsed_cmds[0] == NULL)
         {
@@ -133,7 +132,7 @@ int main()
             }
             continue;
         }
-        else if (strcmp(parsed_cmds[0], "annt") == 0)
+        else if (strcmp(parsed_cmds[0], "bahar") == 0)
         {
             exit(EXIT_SUCCESS);
         }
