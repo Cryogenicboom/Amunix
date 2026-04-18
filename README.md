@@ -64,6 +64,8 @@ Right now, this shell has nothing to do with Networks but it could help you too 
 | Pipe Separation          | `ls \| grep txt`            | Commands are split into multiple arrays using `\|` :contentReference[oaicite:1]{index=1} |
 | Command Count Tracking   | (internal)                 | Counts number of piped commands for execution logic |
 | Argument Structuring     | (internal)                 | Stores commands as `commands[10][50]` (2D array) |
+| > (Overwrite Output)     | `ls > file.txt`            | Sends standard output to a file, creating it if it doesn't exist or overwriting existing content.|
+| < (Input Redirection)    |  `wc -l << file.txt`       | Reads input for a command from a file instead of the keyboard.|
 
 ## TOKENIZATION FEATURES
 | Feature                | Syntax Example              | Description |
