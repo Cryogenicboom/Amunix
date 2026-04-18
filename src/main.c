@@ -108,7 +108,7 @@ int main()
         for(int i = 0; i < cmd.count; i++){
             printf("simpleCommand %d: ", i);
             for(int j = 0; cmd.simpleCommands[i].argv[j] != NULL; j++){
-                printf("%s", cmd.simpleCommands[i].argv[j]);
+                printf("[%s] ", cmd.simpleCommands[i].argv[j]);
             }
             printf("\n");
         }
@@ -138,7 +138,17 @@ int main()
         }
 
         // ================================= External Cmds: ==========================================
-        
+        printf("\nDEBUG:\n");
+        printf("inputFile: %s\n", cmd.inputfile ? cmd.inputfile : "NULL");
+        printf("outputFile: %s\n", cmd.outputfile ? cmd.outputfile : "NULL");
+
+        for(int i = 0; i < cmd.count; i++){
+            printf("cmd[%d]: ", i);
+            for(int j = 0; cmd.simpleCommands[i].argv[j] != NULL; j++){
+                printf("%s ", cmd.simpleCommands[i].argv[j]);
+            }
+            printf("\n");
+        }
         execute_command(&cmd, cmd_count);
          
     }

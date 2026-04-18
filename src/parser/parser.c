@@ -3,14 +3,17 @@
 #include <unistd.h>             // used for system calls POSIX 
 #include <sys/wait.h>
 #include "tokenizer.h"
+#include "command.h"
 
-
+Command strcut_cmd; 
 
 // ERROR 10 in diary
 void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int *cmd_count){
     int c_idx = 0;          // command index (row)
     int args_idx = 0;       // argument index ( column )
     *cmd_count =1;
+
+    // Command strcut_cmd; 
 
     for(int i =0; parsed_cmds[i] != NULL; i++)
     {
@@ -21,6 +24,17 @@ void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int 
             args_idx = 0;
             *cmd_count += 1;
         }
+        else if(strcmp(parsed_cmds[i], ">") == 0)
+        {
+            i++;
+            strcut_cmd.outputfile = parsed_cmds[i];
+        }
+        else if(strcmp(parsed_cmds[i], "<") == 0)
+        {
+            i++;
+            strcut_cmd.inputfile = parsed_cmds[i];
+        }
+
         else{
             commands[c_idx][args_idx++] = parsed_cmds[i];
         }

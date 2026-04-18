@@ -10,6 +10,8 @@ typedef struct{
     int count;
     SimpleCommand simpleCommands [10];  // like we did before commands[10][50]
 
+    char *inputfile;
+    char *outputfile;
 } Command ;
 
 #endif
