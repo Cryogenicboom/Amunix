@@ -5,10 +5,10 @@
 #include "tokenizer.h"
 #include "command.h"
 
-Command strcut_cmd; 
+// Command strcut_cmd; 
 
 // ERROR 10 in diary
-void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int *cmd_count){
+void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int *cmd_count, Command *cmd){
     int c_idx = 0;          // command index (row)
     int args_idx = 0;       // argument index ( column )
     *cmd_count =1;
@@ -27,12 +27,12 @@ void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int 
         else if(strcmp(parsed_cmds[i], ">") == 0)
         {
             i++;
-            strcut_cmd.outputfile = parsed_cmds[i];
+            cmd->outputfile = parsed_cmds[i];
         }
         else if(strcmp(parsed_cmds[i], "<") == 0)
         {
             i++;
-            strcut_cmd.inputfile = parsed_cmds[i];
+            cmd->inputfile = parsed_cmds[i];
         }
 
         else{
