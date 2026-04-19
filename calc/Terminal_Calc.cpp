@@ -1,0 +1,97 @@
+#include <iostream>
+#include <string>
+#include <stack>
+
+
+int intro(){
+
+    std::cout << "████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗          ██████╗ █████╗ ██╗      ██████╗\n";
+    std::cout << "╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║         ██╔════╝██╔══██╗██║     ██╔══\n";
+    std::cout << "   ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║         ██║     ███████║██║     ██║  \n";
+    std::cout << "   ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║         ██║     ██╔══██║██║     ██║  \n";
+    std::cout << "   ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗    ╚██████╗██║  ██║███████╗ ██████\n";
+    std::cout<<std::endl;
+    return 0;
+ 
+}
+
+int precedence(char op){
+    if(op == '+' || op == '-') return 1;
+    if(op == '*' || op == '/') return 2;
+    return 0;
+}
+
+void calc(std::stack<int>& operand, std::stack<char>& op){
+    int right_side = operand.top(); operand.pop();
+    int left_side = operand.top(); operand.pop();
+
+    char oper = op.top(); op.pop();
+
+    int result;
+
+    if(oper == '+') result = left_side + right_side;
+    else if(oper == '-') result = left_side - right_side;
+    else if(oper == '*') result = left_side * right_side;
+    else if(oper == '/') result = left_side / right_side;
+
+    operand.push(result);
+}
+
+// operator > operand > operator
+int parsing(std::string exp){
+    std::stack<int> operand;
+    std::stack<char> op;
+
+    int num = 0;
+    for(int i = 0; i < int(exp.length()); i++){
+        if(exp[i] == ' '){
+            continue;
+        }
+
+        if(isdigit(exp[i])){
+            num = num*10 + (exp[i]-'0');
+        }
+
+        else{
+            operand.push(num);
+            num = 0;
+
+            while(!op.empty() && precedence(op.top()) >= precedence(exp[i])){
+                calc(operand, op);
+            }
+
+            op.push(exp[i]);
+        }
+
+    }
+
+    operand.push(num);
+    while(!op.empty()){
+        calc(operand, op);
+    }
+    return operand.top();
+    
+}
+
+
+int calc_menu(){
+    intro();
+    while(true){
+        
+        std::cout<<std::endl;
+        std::cout<<"guest/home:user$ ";
+        std::string expression;
+        std::getline(std::cin, expression);
+        if(expression == "quit"){
+            return 0;
+        }
+        int result = parsing(expression);
+
+        std::cout<<result;
+        
+    }
+    return 0;
+}
+
+
+     
