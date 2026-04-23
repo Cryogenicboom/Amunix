@@ -130,12 +130,12 @@ int main()
 
 
         // ========================================BUILT IN CMDS: ========================================
-        if(strcmp(parsed_cmds[0], "dirbadlo") == 0)
+        if(strcmp(parsed_cmds[0], "dbd") == 0)
         {
             printf("        DEBUG: [%s, %s, %s]\n", parsed_cmds[0], parsed_cmds[1], parsed_cmds[2]);
             if(chdir(parsed_cmds[1]) == -1)         // chdir us used to dirbadlo
             {
-                perror("dirbadlo failed");
+                perror("command directory badlo failed");
             }
             continue;
         }
@@ -143,22 +143,7 @@ int main()
         {
             exit(EXIT_SUCCESS);
         }
-        // else if(strcmp(parsed_cmds[0], "calc") == 0)
-        // {
-        //     pid_t pid = fork();
-        //     if(pid == 0)
-        //     {
-        //         execl("./calc", "calc", NULL);
-        //         perror("calc exec failed");
-        //         exit(1);
-        //     }
-        //     else
-        //     {
-        //         wait(NULL);
-        //     }
-
-        //     continue;
-        // }
+        
 
         // ================================= External Cmds: ==========================================
         printf("\nDEBUG:\n");

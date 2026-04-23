@@ -48,10 +48,10 @@ AMUNIX could help you too study the strucutre and how a shell operates at base l
 <br>
 
 ### BUILT IN COMMANDS: 
-| Command   | Syntax                     | Description |
-|----------|----------------------------|-------------|
-| dirbadlo | `dirbadlo <directory>`     | Changes the current working directory using `chdir()` system call |
-| bahar    | `bahar`                    | Exits the shell program using `exit()` |
+| Command         | Syntax                     | Description |
+|-----------------|----------------------------|-------------|
+| directory badlo | `dbd <directory>`          | Changes the current working directory using `chdir()` system call |
+| bahar           | `bahar`                    | Exits the shell program using `exit()` |
 
 ### SYSTEM COMMAND
 | Feature            | Syntax Example              | Description |
