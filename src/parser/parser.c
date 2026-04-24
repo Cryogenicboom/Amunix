@@ -5,41 +5,77 @@
 #include "tokenizer.h"
 #include "command.h"
 
-// Command strcut_cmd; 
+void parse_struct(char *tokens[], Command *cmd)
+{
+    int c_idx = 0;              // current command index
+    int argc = 0;               // argument index
 
-// ERROR 10 in diary
-void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int *cmd_count, Command *cmd){
-    int c_idx = 0;          // command index (row)
-    int args_idx = 0;       // argument index ( column )
-    *cmd_count =1;
+    cmd->count =  1;
+    cmd->inputfile = NULL;
+    cmd->outputfile = NULL;
 
-    // Command strcut_cmd; 
-
-    for(int i =0; parsed_cmds[i] != NULL; i++)
-    {
-        if(strcmp(parsed_cmds[i], "|") == 0)
-        {
-            commands[c_idx][args_idx] = NULL;
-            c_idx += 1;
-            args_idx = 0;
-            *cmd_count += 1;
-        }
-        else if(strcmp(parsed_cmds[i], ">") == 0)
-        {
-            i++;
-            cmd->outputfile = parsed_cmds[i];
-        }
-        else if(strcmp(parsed_cmds[i], "<") == 0)
-        {
-            i++;
-            cmd->inputfile = parsed_cmds[i];
-        }
-
-        else{
-            commands[c_idx][args_idx++] = parsed_cmds[i];
-        }
+    for(int j = 0; j < 10; j++) {
+    cmd->simpleCommands[j].argc = 0;
     }
-    commands[c_idx][args_idx] = NULL;
+
+    for(int i = 0; tokens[i] != NULL; i++) {
+
+        if(strcmp(tokens[i], "|") == 0)
+        {
+            if(argc == 0)
+            {
+                printf("Syntax not defined: Empty command before pipe");
+                return;
+            }
+            
+            cmd->simpleCommands[c_idx].argv[argc] = NULL;
+        
+            c_idx++;
+            cmd->count++;
+            argc = 0;
+            cmd->simpleCommands[c_idx].argc = 0;
+        }
+        else if(strcmp(tokens[i], ">") == 0)
+        {
+            if(tokens[i+1] == NULL)
+            {
+                printf("Syntax not defined: No output file given");
+                return;
+            }
+
+            cmd->outputfile = tokens[i+1];
+            i++;                            // skip the file name
+        }
+        else if(strcmp(tokens[i], "<") == 0)
+        {
+            if(tokens[i+1] == NULL)
+            {
+                printf("Syntax not defined: No input file given");
+                return;
+            }
+
+            cmd->inputfile = tokens[i+1];
+            i++;                            // skip the file name
+        }
+        else
+        {
+            cmd->simpleCommands[c_idx].argv[argc] = tokens[i];
+            argc++;
+            cmd->simpleCommands[c_idx].argc = argc;
+
+        }
+
+    }
+    if(argc == 0 && cmd->count > 1)
+    {
+        printf("Syntax not defined: Abondend pipe\n");
+        return;
+    }
+    if(argc > 0)
+    {
+        cmd->simpleCommands[c_idx].argv[argc] = NULL;
+    }
+
 }
 
 
@@ -53,15 +89,26 @@ void parser_for_quotes(char * cmds[], char * parsed_cmds[])
             char temp[200];
             temp[0] = '\0';
             strcat(temp, cmds[i]+1);
-            while(cmds[i][strlen(cmds[i]) -1] != '"')   // check every 2nd letter of each index to be '"' or not.    
+
+            while(cmds[i] != NULL && cmds[i][strlen(cmds[i]) -1] != '"')
             {          
                 strcat(temp, " ");
                 i += 1;
+
+                if(cmds[i] == NULL)
+                {
+                    printf("Error: unmatched quote\n");
+                    return;
+                }
+
                 strcat(temp, cmds[i]);
             }
 
             int temp_len = strlen(temp);
-            temp[temp_len - 1] = '\0';              // replace the ending quote with null terminator.
+            if(temp_len > 0 && temp[temp_len - 1] == '"')               // replace the ending quote with null terminator.
+            {
+                temp[temp_len - 1] = '\0';
+            }              
 
             parsed_cmds[j] = strdup(temp);
             j += 1;
@@ -82,3 +129,41 @@ void parser_for_quotes(char * cmds[], char * parsed_cmds[])
         printf("\n%s", parsed_cmds[a]);
     }
 }
+
+
+// Command strcut_cmd; 
+
+// // ERROR 10 in diary
+// void parsing_by_special_char(char * parsed_cmds[], char * commands[10][50], int *cmd_count, Command *cmd){
+//     int c_idx = 0;          // command index (row)
+//     int args_idx = 0;       // argument index ( column )
+//     *cmd_count =1;
+
+//     // Command strcut_cmd; 
+
+//     for(int i =0; parsed_cmds[i] != NULL; i++)
+//     {
+//         if(strcmp(parsed_cmds[i], "|") == 0)
+//         {
+//             commands[c_idx][args_idx] = NULL;
+//             c_idx += 1;
+//             args_idx = 0;
+//             *cmd_count += 1;
+//         }
+//         else if(strcmp(parsed_cmds[i], ">") == 0)
+//         {
+//             i++;
+//             cmd->outputfile = parsed_cmds[i];
+//         }
+//         else if(strcmp(parsed_cmds[i], "<") == 0)
+//         {
+//             i++;
+//             cmd->inputfile = parsed_cmds[i];
+//         }
+
+//         else{
+//             commands[c_idx][args_idx++] = parsed_cmds[i];
+//         }
+//     }
+//     commands[c_idx][args_idx] = NULL;
+// }
