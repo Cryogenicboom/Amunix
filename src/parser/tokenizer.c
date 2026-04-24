@@ -6,25 +6,110 @@
 #include <sys/wait.h>
 
 
-void tokenize(char *user_input, char * cmds[], char *parsed_cmds[]){
-    char deli[] = " \t";                            // delimeter are single space or multiple spaces (tab)
+void tokenize(char *user_input, char * tok_cmds[]){
+    
+    int i = 0;                          // index of user_input 
+    int word_idx = 0;                   // index of current word's index ( subindex )
+    int token_idx = 0;                  // index to add in char * tok_cmds[]
 
-    char * tokenptr = strtok(user_input, deli);
-    int i = 0;
-    while(tokenptr != NULL)
+    char buffer[100];                    // buffer to store while tracing index by index
+
+    while(user_input[i] != '\0')
     {
-        cmds[i] = tokenptr;                         // kept at top to store the first token generated outside the while loop
-        tokenptr = strtok(NULL, deli);
-        i++;
+        if(user_input[i] == ' ' || user_input[i] == '\t')
+        {
+            if(word_idx > 0)                            // if buffer is empty or filled, if filled do this
+            {
+                buffer[word_idx] = '\0';
+                tok_cmds[token_idx] = strdup(buffer);
+                word_idx = 0;
+                token_idx++;
+            }
+            i++;
+            
+        }
+        else if(user_input[i] == '|' || user_input[i] == '>' || user_input[i] == '<')
+        {
+            
+            char temp[3];
+            
+            if(word_idx > 0)                            // if buffer is empty or filled, if filled do this
+            {
+                buffer[word_idx] = '\0';
+                tok_cmds[token_idx] = strdup(buffer);
+                word_idx = 0;
+                token_idx++;
+            }
+
+            // >> or << or >& or <&
+            if(user_input[i] == '>')
+            {
+                if(user_input[i+1] != '\0' && user_input[i+1] == '>')
+                {
+                    temp[0] = user_input[i];
+                    temp[1] = user_input[i+1];
+                    temp[2] = '\0';
+
+                    tok_cmds[token_idx] = strdup(temp);
+                    i += 2;
+                    token_idx++;
+                }
+                else if(user_input[i+1] != '\0' && user_input[i+1] == '&')
+                {
+                    temp[0] = user_input[i];
+                    temp[1] = user_input[i+1];
+                    temp[2] = '\0';
+
+                    tok_cmds[token_idx] = strdup(temp);
+                    i += 2;
+                    token_idx++;
+                }
+                else if(user_input[i+1] == '<')
+                {
+                    printf("what is this '><' command huh?");
+                    return;
+                }
+                else
+                {
+                    // since strdup takes string as parameter, and '|' is a single char, conver it to string by adding \0
+                    temp[0] = user_input[i];
+                    temp[1] = '\0';
+                    tok_cmds[token_idx] = strdup(temp);
+                    i++;
+                    token_idx++;            
+                }
+
+            }
+            if((user_input[i] == '<' && user_input[i+1] != '\0') && (user_input[i+1] == '<' || user_input[i+1] == '&'))
+            {
+                printf("sorry user but this command is still in development {<<, <&, >&}");
+                return;
+            }
+            else
+            {
+                // since strdup takes string as parameter, and '|' is a single char, conver it to string by adding \0
+                temp[0] = user_input[i];
+                temp[1] = '\0';
+                tok_cmds[token_idx] = strdup(temp);
+                i++;
+                token_idx++;            
+            }
+            
+        }
+        else
+        {
+            buffer[word_idx] = user_input[i];
+            word_idx++;
+            i++;
+        }
     }
-    cmds[i] = NULL;                                 // add NULL at the end of command to let know other shell (execvp) this command has terminated.
 
-    if(cmds[0] == NULL)
+    if(word_idx > 0)                            // if buffer is empty or filled, if filled do this
     {
-        parsed_cmds[0] = NULL;
-        return;
-    } 
-    
-    parser_for_quotes(cmds, parsed_cmds);
-    
+        buffer[word_idx] = '\0';
+        tok_cmds[token_idx] = strdup(buffer);
+        word_idx = 0;
+        token_idx++;
+    }
+    tok_cmds[token_idx] = NULL;                 // our whole tok_cmds array ends with NULL for exec (check notes)
 }
