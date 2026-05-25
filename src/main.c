@@ -62,10 +62,6 @@ int arrow_keys(char single_char, char user_input[100], struct cmd_history *tail,
 
     if(single_char == 91)
     {   
-        if(*navptr == NULL)
-        {
-            return 0;
-        }
 
         single_char = getchar();
         
@@ -74,16 +70,32 @@ int arrow_keys(char single_char, char user_input[100], struct cmd_history *tail,
             printf("\b \b");
         }
 
-        if(single_char == 65 && *navptr != head)
+        if(single_char == 65)
             {   
-                *navptr = (*navptr)->previous;
+                if(*navptr == NULL) 
+                {
+                    return 0;
+                }
                 printf("%s", (*navptr)->h_cmds);
                 strcpy(user_input, (*navptr)->h_cmds);
-                return strlen(user_input);
+                int len = strlen(user_input);
+
+                // *navptr = (*navptr)->previous;
+
+                if((*navptr)->previous != NULL)
+                {
+                    *navptr = (*navptr)->previous;
+                }
+
+                return len;
             }
         else if(single_char == 66)
-        {
-            if(*navptr != tail)
+        {   
+            if(*navptr == NULL)
+            {
+                return 0;
+            }
+            if((*navptr)->next != NULL)
             {
                 *navptr = (*navptr)->next;
                 printf("%s", (*navptr)->h_cmds);
@@ -92,7 +104,7 @@ int arrow_keys(char single_char, char user_input[100], struct cmd_history *tail,
             }
             else 
             {   
-                strcpy(user_input, "\0");
+                user_input[0] = '\0';
                 return 0;
             }
         }
@@ -180,7 +192,7 @@ int main()
 
         if(strlen(user_input) != 0)
         {
-            // if block only runs at start, when tail = head
+            // "if block "only runs at start, when tail = head
             if(tail == NULL)
             {
                 tail = (struct cmd_history *) malloc(sizeof(struct cmd_history));   // first node 
