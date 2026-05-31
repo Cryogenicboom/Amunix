@@ -26,19 +26,12 @@ To learn about the working and internal structure you can refer to [Architecture
 
 ## Installing the shell
 
-1. chmod +x install.sh
-2. ./install.sh
-
-OR --- 
-
-1. Fork this repo and zip file it on your system.
-2. Create a new folder named "AMUNIX" and unzip the downlaoded folder here. 
-2. open terminal (WIN+R --> cmd --> enter), and in terminal itself, go to the AMUNIX folder where you have extracted the shell contents.
-3. Run \> `make all` 
-4. then \> `make run`
-5. if gnome is not downlaoded --> `sudo apt install gnome-terminal` write this in terminal and run.
-6. gnome is yet to be debuged, it will be added soon.
-7. `bahar` to exit
+1. downlaod the dependencies 
+> chmod +x install.sh
+> ./install.sh
+2.  Compile and run
+> make all 
+> make run
 
 ## Run Time images 
 <img src="images/display1.png" alt="Window" width="500"/>
