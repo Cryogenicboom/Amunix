@@ -25,12 +25,17 @@ To learn about the working and internal structure you can refer to [Architecture
 </p>
 
 ## Installing the shell
+1. clone the shell 
+> git clone https://github.com/Cryogenicboom/Amunix.git
+> <br>
+> cd Amunix
 
-1. downlaod the dependencies 
+2. downlaod the dependencies 
 > chmod +x install.sh
 > <br>
 > ./install.sh
-2.  Compile and run
+
+3.  Compile and run
 > make all 
 > <br>
 > make run
