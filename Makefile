@@ -29,6 +29,7 @@ all:
 # "make run" to run the final .o file
 run: 
 # 	exec ./$(OUT)
+# 	intall.sh
 	gnome-terminal --geometry=120x30 -- ./$(OUT)
 
 # deletes the .o file created.
