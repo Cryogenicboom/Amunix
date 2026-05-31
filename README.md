@@ -28,9 +28,11 @@ To learn about the working and internal structure you can refer to [Architecture
 
 1. downlaod the dependencies 
 > chmod +x install.sh
+> <br>
 > ./install.sh
 2.  Compile and run
 > make all 
+> <br>
 > make run
 
 ## Run Time images 
