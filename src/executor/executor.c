@@ -3,6 +3,7 @@
 #include <string.h>             // to be only used for strtok()
 #include <unistd.h>             // used for system calls POSIX 
 #include <fcntl.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include "command.h"
 
@@ -33,9 +34,16 @@ void execute_command(Command *cmd, int cmd_count)
             }
 
             pid_t pid = fork();             // each command is a new process with their own file desc. table
-            
-            if(pid == 0)
-            {
+
+            if(pid == 0)                    // fork return 0 if child is successfully created
+            {   
+                setpgid(pid, 0);
+                // debug 
+                pid_t child_gid = getpgrp();
+                printf("child_grp_id == %d\n", child_gid);
+                fflush(stdout);
+                // debug end 
+
                 dup2(fdin, 0);
                 close(fdin);
 
@@ -69,6 +77,11 @@ void execute_command(Command *cmd, int cmd_count)
             
             else if (pid > 0)
             {   
+                setpgid(pid, pid);                // parents changes the child's group
+                // debug 
+                pid_t parent_gid = getpgrp();
+                printf("parent_group_id == %d", parent_gid);
+                // debug end
                 close(fdin);
                 if(i < cmd_count-1)
                 {
@@ -92,4 +105,4 @@ void execute_command(Command *cmd, int cmd_count)
         {
             wait(NULL);
         }
-}
+} 
