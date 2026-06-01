@@ -8,7 +8,6 @@
    .8'     `888.   8    Y     888   `88.    .8'     8    Y888 .88    888     d8'  `888b
   o88o     o8888o o8o        o888o    `YbodP'      o8o      88888o  o888o oo888o  o88888o 
 ```
-<br>
 
 ###### Yes this ASCII title was way harder than making the Shell.
 
@@ -18,7 +17,7 @@
 <br>
 
 <p> 
-I used to procrastinate learning C, it was boring watching tutorials, reading manuels i don't understand fully, i wanted a reason to learn, and that's why i decided to get my hands dirty. But why shell? Because shell is an amazing interface that provides utilities to interact with the OS directly. You might wonder what actually happens when you type your commands on screen, how does it detect keyboard input, how does it know where to output? How can you detect an up arrow key when your command registers with enter key?
+I used to procrastinate learning C, it was boring watching tutorials, reading manuels i don't understand the content, i wanted a reason to learn, and that's why i decided to get my hands dirty. But why shell? Because shell is an interface that provides utilities to interact with the OS directly. You might wonder what actually happens when you type your commands on screen, how does it detect keyboard input, how does it know where to output? How can you detect an up arrow key when your command registers input with enter key ?
 
 That's how AMUNIX can help you too study "how a shell operates at base level". AMUNIX is your tool, study it if you want to understand what happens between your keypress and OS. 
 To learn about the working and internal structure you can refer to [Architecture.md](https://github.com/Cryogenicboom/Amunix/blob/main/ARCHITECTURE.md) 
