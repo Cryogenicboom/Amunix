@@ -3,6 +3,7 @@
 #include <string.h>             // to be only used for strtok()
 #include <unistd.h>             // used for system calls POSIX 
 #include <sys/wait.h>
+#include <signal.h>
 
 #include "parser.h"
 #include "tokenizer.h"
@@ -119,7 +120,7 @@ int arrow_keys(char single_char, char user_input[100], struct cmd_history *tail,
 int main()
 {
     header();
-
+    signal(SIGTTOU, SIG_IGN);
     // struct termios orignal_state;
     tcgetattr(STDIN_FILENO, &orignal_state);
 

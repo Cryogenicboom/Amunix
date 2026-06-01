@@ -6,8 +6,8 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include "command.h"
-
-
+#include <termio.h>
+#include "executor.h"
 
 void execute_command(Command *cmd, int cmd_count)
 {
@@ -24,6 +24,8 @@ void execute_command(Command *cmd, int cmd_count)
         fdin = dup(0);
     }
 
+    pid_t parent_gid = getpgrp();
+
     for(int i = 0; i < cmd_count; i ++)
         {
             int fd[2];
@@ -37,12 +39,7 @@ void execute_command(Command *cmd, int cmd_count)
 
             if(pid == 0)                    // fork return 0 if child is successfully created
             {   
-                setpgid(pid, 0);
-                // debug 
-                pid_t child_gid = getpgrp();
-                printf("child_grp_id == %d\n", child_gid);
-                fflush(stdout);
-                // debug end 
+                setpgid(pid, 0);            // change child's process group
 
                 dup2(fdin, 0);
                 close(fdin);
@@ -69,7 +66,6 @@ void execute_command(Command *cmd, int cmd_count)
 
                 dup2(fdout, 1);
                 close(fdout);
-                
                 execvp(cmd->simpleCommands[i].argv[0], cmd->simpleCommands[i].argv);
                 perror("execvp failed");
                 _exit(1);                               // _exit() prevents child changing mode
@@ -78,10 +74,7 @@ void execute_command(Command *cmd, int cmd_count)
             else if (pid > 0)
             {   
                 setpgid(pid, pid);                // parents changes the child's group
-                // debug 
-                pid_t parent_gid = getpgrp();
-                printf("parent_group_id == %d", parent_gid);
-                // debug end
+                tcsetpgrp(STDIN_FILENO, pid);     // parents makes child foreground groupm
                 close(fdin);
                 if(i < cmd_count-1)
                 {
@@ -105,4 +98,6 @@ void execute_command(Command *cmd, int cmd_count)
         {
             wait(NULL);
         }
+        tcsetpgrp(STDIN_FILENO, parent_gid);
+        
 } 
