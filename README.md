@@ -72,6 +72,7 @@ To learn about the working and internal structure you can refer to [Architecture
 | Feature            | Syntax Example              | Description |
 |-------------------|----------------------------|-------------|
 | External Commands | `ls -l`, `pwd`, `echo hi`  | Executed using `fork()` + `execvp()`  |
+| ls color coded    | `ls --color=auto`          | gives out ls output color coded       |
 | Argument Passing  | `ls -l /home`              | Arguments are passed as `char* argv[]` to `execvp()` |
 | Process Handling  | (implicit)                 | Parent waits for child using `wait()` after execution |
 
