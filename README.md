@@ -23,6 +23,10 @@ That's how AMUNIX can help you too study "how a shell operates at base level". A
 To learn about the working and internal structure you can refer to [Architecture.md](https://github.com/Cryogenicboom/Amunix/blob/main/ARCHITECTURE.md) 
 </p>
 
+<p>
+use ([Valgrind](https://valgrind.org/)) to debug and check for mem leaks.
+</p>
+
 ## Installing the shell
 1. clone the shell 
 > git clone https://github.com/Cryogenicboom/Amunix.git
