@@ -54,7 +54,7 @@ void parse_struct(char *tokens[], Command *cmd)
                 return;
             }
 
-            cmd->inputfile = tokens[i+1];
+            cmd->inputfile = strdup(tokens[i+1]);
             i++;                            // skip the file name
         }
         else
@@ -116,7 +116,7 @@ void parser_for_quotes(char * cmds[], char * parsed_cmds[])
         }
         else
         {
-            parsed_cmds[j] = cmds[i];
+            parsed_cmds[j] = strdup(cmds[i]);                           // error 25 diary
             j += 1;
             i += 1;
         }
@@ -128,6 +128,7 @@ void parser_for_quotes(char * cmds[], char * parsed_cmds[])
     // for(int a = 0; parsed_cmds[a] != NULL; a++){
     //     printf("\n%s", parsed_cmds[a]);
     // }
+    // // Debug end
 }
 
 
