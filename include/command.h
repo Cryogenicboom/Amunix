@@ -13,4 +13,6 @@ typedef struct{
     char *outputfile;
 } Command ;
 
+void free_command_mem(Command *cmd);
+
 #endif

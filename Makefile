@@ -16,7 +16,8 @@ SOURCES = src/main.c \
 src/parser/parser.c \
 src/parser/tokenizer.c \
 src/executor/executor.c \
-src/builtins/builtins.c
+src/builtins/builtins.c \
+src/command.c
 
 OUT = AMUNIX
 

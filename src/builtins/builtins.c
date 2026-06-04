@@ -1,3 +1,5 @@
+// returns 0 if builtins used else returns 1
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>             // to be only used for strtok()

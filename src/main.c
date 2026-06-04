@@ -53,8 +53,24 @@ void header(){
 void restore_terminal()
 {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &orignal_state);
-    free(tail);
-    free(head);
+    // free the whole list
+    if(head != NULL)
+    {
+        struct cmd_history *next_ptr = head->next;
+        struct cmd_history *curnt_ptr = head;
+        while(curnt_ptr != NULL)
+        {
+            free(curnt_ptr);
+            curnt_ptr = next_ptr;
+            if(curnt_ptr != NULL)
+            {
+                next_ptr = curnt_ptr->next;
+            }
+        }
+        free(next_ptr);
+        free(curnt_ptr);
+    }
+
 }
 
 int arrow_keys(char single_char, char user_input[100], struct cmd_history *tail, struct cmd_history *head, int i, struct cmd_history **navptr)
@@ -144,11 +160,10 @@ int main()
     {
         char user_input[100];
         char single_char;
-        char *tok_cmds[300];                            //these commands are tokenized only
-        char *parsed_cmds[300] = {NULL};               // these commands are parsed matlab, [ERROR 4 in diary]
+        char *tok_cmds[300];                             //these commands are tokenized only
+        char *parsed_cmds[300] = {NULL};                // these commands are parsed matlab, [ERROR 4 in diary]
         
         char pwd[100];
-
         if(getcwd(pwd, sizeof(pwd)) != NULL)
         {
             printf("\n\x1b[32mUser@system:%s $\x1b[0m", pwd);
@@ -269,35 +284,48 @@ int main()
         //     }
         //     printf("\n");
         // }
+        // DEBUG END
 
         if(parsed_cmds[0] == NULL)
         {
+            for(int i = 0; tok_cmds[i] != NULL; i++)                // free tokens
+            {
+                free(tok_cmds[i]);
+            }
+
+            for(int i = 0; parsed_cmds[i] != NULL; i++)             // free parsed commands
+            {
+                free(parsed_cmds[i]);
+            }
+
             continue;
         }
 
         // // debug
         // printf("\n      DEBUG: parsed_cmds[0] = %p\n\n", parsed_cmds[0]); //check for seg fault 
-
+        // // debug end
 
         // ========================================BUILT IN CMDS: ========================================
-        if(built_ins(parsed_cmds) == 0)
+        if(built_ins(parsed_cmds) != 0)             
         {
-            continue;
+            // ===============External Cmds: ===============
+            execute_command(&cmd, cmd.count);
         }
  
-        // ================================= External Cmds: ==========================================
+        // free the strdup heap memory allocation
+        free_command_mem(&cmd);                                 // IO files from command strcut
         
-        // DEBUG COMMENT DUE TO RAW MODE ---------- UPDATE IT TOO
-        
-        // for(int i = 0; i < cmd.count; i++){
-        //     printf("cmd[%d]: ", i);
-        //     for(int j = 0; cmd.simpleCommands[i].argv[j] != NULL; j++){
-        //         printf("%s ", cmd.simpleCommands[i].argv[j]);
-        //     }
-        //     putchar('\n');
-        // }
-        execute_command(&cmd, cmd.count);
-         
+        for(int i = 0; tok_cmds[i] != NULL; i++)                // free tokens
+        {
+            free(tok_cmds[i]);
+        }
+
+        for(int i = 0; parsed_cmds[i] != NULL; i++)             // free parsed commands
+        {
+            free(parsed_cmds[i]);
+        }
+
     }
+
     return 0;
 }   
