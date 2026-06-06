@@ -15,9 +15,7 @@ Welcome to the AMUNIX guide. This guide will trace all the functions, files, con
 
 2. we will follow some commands and trace their route throughout the code and understand different concepts as we comes up with new stuffs. 
 
-3. RAW MODE: When you write your command in command prompt, you can observe that it only works on your command after you hit the enter key. But Try to press `up arrow key` and `down arrow key`, you might see history of previous commands you used. But how does this work? You never press enter key with those directional keys. Raw mode is your answe then, refer to this [article](https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html). 
-<br>
-you should learn these concepts before moving ahead: 
+3. RAW MODE: When you write your command in command prompt, you can observe that it only works on your command after you hit the enter key. But Try to press `up arrow key` and `down arrow key`, you might see history of previous commands you used. But how does this work? You never press enter key with those directional keys. Raw mode is your answe then, refer to this [article](https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html). you should learn these concepts before moving ahead: 
 - Termios 
 - ECHO and ICANON flags 
 - get/set attr in TERMIOS 
