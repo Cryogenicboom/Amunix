@@ -25,6 +25,16 @@ To learn about the working and internal structure you can refer to [Architecture
 
 <br>
 
+## What is Shell?
+<p>
+Shell is a CLI (Command Line Interface) that acts as an interface for an Operating System. Shell enables user to interact with kernal. it provides user with commands, execute programmes for them and manages Input and Output functionality. 
+</p>
+
+## Why AMUNIX? 
+<p>
+I know there exist professional shells already. I built AMUNIX as a curiosity driven project. I was studying   [OSTEP]("https://pages.cs.wisc.edu/~remzi/OSTEP/"), this book ignited the spark in me to understand computers at fundamentals. I thought "why not learn by doing?". I hope that this shell will also help other curious minds to understand the shell development. 
+</p>
+
 > use [Valgrind](https://valgrind.org/) to debug and check for mem leaks.
 
 
