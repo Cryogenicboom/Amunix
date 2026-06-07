@@ -61,17 +61,19 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 <img src="images/display2.png" alt="Window2" width="500"/>
 <br>
 
-<img src="images/Untitled.jpg" alt="Window3" width="600"/>
+<img src="images/display3.jpg" alt="Window3" width="500"/>
+<br>
+
+<img src="images/display4.jpg" alt="Window4" width="500"/>
+
 
 ## See detailed documentation here:  
 
 [Basic Architecture](ARCHITECTURE.md)
 <br>
 
-[Calc Documentation (not integrated yet)](calc/calc_doc.md)
-<br>
 
-## Command List for AMUNIX ( in development )
+## Command List for AMUNIX ( still adding )
 <br>
 
 ### BUILT IN COMMANDS: 
@@ -90,6 +92,7 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 | ls color coded    | `ls --color=auto`          | gives out ls output color coded       |
 | Argument Passing  | `ls -l /home`              | Arguments are passed as `char* argv[]` to `execvp()` |
 | Process Handling  | (implicit)                 | Parent waits for child using `wait()` after execution |
+| background process| `sleep 5 &`                | `&` at end of input send command to background        |
 
 ### PARSING FEATURES
 | Feature                  | Syntax Example              | Description |
@@ -103,13 +106,13 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 ### TOKENIZATION FEATURES
 | Feature                | Syntax Example              | Description |
 |------------------------|----------------------------|-------------|
-| Space Tokenization     | `ls -l`                    | Input split using `strtok()` with space & tab delimiters :contentReference[oaicite:2]{index=2} |
-| Quote Handling         | `"My Folder"`              | Multi-word arguments handled using custom parser |
+| Lexical analysis       | `ls -l` --> {'ls', '-l'}   | Input is split into multiple tokens w.r.t delimeters defined |
+| Quote Handling         | `"My Folder"`              | Multi-word-spaced arguments handled using custom parser |
 | Null Termination       | (internal)                 | Arrays end with `NULL` for compatibility with `execvp()` |
 
 ### LIMITATIONS
-| Limitation            | Current Behavior |
-|----------------------|------------------|
-| Redirection          | Not implemented (`>>`, `<<`, etc.) |
-| Background Process   | Not supported (`&`) |
-| Error Handling       | Minimal |
+| Limitation            | Current status      |
+|----------------------|----------------------|
+| Append               | Not implemented `>>` |
+| fg and bg Job control| in development       |
+| strtok() tokenization| removed, manuallt tokenizing now |
