@@ -15,6 +15,7 @@ void execute_command(Command *cmd, int cmd_count)
     // int fdin = 0;   // intial command is read from keyboard "stdin". fdin will be updated to track which input should next command read from.
     int fdin;          // fd where current command read from
 
+
     if(cmd->inputfile != NULL)
     {
         fdin = open(cmd->inputfile, O_RDONLY);
@@ -29,6 +30,7 @@ void execute_command(Command *cmd, int cmd_count)
     for(int i = 0; i < cmd_count; i ++)
         {
             int fd[2];
+
             // create pipe connection only when needed, like at last command no pipe is needed. 
             if(i < cmd_count - 1)
             {
@@ -68,13 +70,18 @@ void execute_command(Command *cmd, int cmd_count)
                 close(fdout);
                 execvp(cmd->simpleCommands[i].argv[0], cmd->simpleCommands[i].argv);
                 perror("execvp failed");
-                _exit(1);                               // _exit() prevents child changing mode
+                _exit(1);                                        // _exit() prevents child changing mode
             }
             
             else if (pid > 0)
             {   
-                setpgid(pid, pid);                // parents changes the child's group
-                tcsetpgrp(STDIN_FILENO, pid);     // parents makes child foreground groupm
+                setpgid(pid, pid);                              // parents changes the child's group
+
+                if(cmd->bg_status != 1)                         // Do not make child foreground if it is set to be bg (&)
+                {
+                    tcsetpgrp(STDIN_FILENO, pid);               // parents makes child foreground groupm
+                }
+
                 close(fdin);
                 if(i < cmd_count-1)
                 {
@@ -93,11 +100,13 @@ void execute_command(Command *cmd, int cmd_count)
         {
             close(fdin);
         }
-
-        for(int i =0; i < cmd_count; i ++)
+        if (cmd->bg_status != 1)
         {
-            wait(NULL);
+            for(int i =0; i < cmd_count; i ++)
+            {
+                wait(NULL);
+            }
+            tcsetpgrp(STDIN_FILENO, parent_gid);
         }
-        tcsetpgrp(STDIN_FILENO, parent_gid);
         
 } 

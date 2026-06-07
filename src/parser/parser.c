@@ -9,11 +9,11 @@ void parse_struct(char *tokens[], Command *cmd)
 {
     int c_idx = 0;              // current command index
     int argc = 0;               // argument index
-
     cmd->count =  1;
     cmd->inputfile = NULL;
     cmd->outputfile = NULL;
-
+    cmd->bg_status = 0;
+    
     for(int j = 0; j < 10; j++) {
     cmd->simpleCommands[j].argc = 0;
     }
@@ -56,6 +56,10 @@ void parse_struct(char *tokens[], Command *cmd)
 
             cmd->inputfile = strdup(tokens[i+1]);
             i++;                            // skip the file name
+        }
+        else if(strcmp(tokens[i], "&") == 0)
+        {
+            cmd->bg_status = 1;
         }
         else
         {

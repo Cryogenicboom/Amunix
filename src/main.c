@@ -137,6 +137,7 @@ int main()
 {
     header();
     signal(SIGTTOU, SIG_IGN);
+    
     // struct termios orignal_state;
     tcgetattr(STDIN_FILENO, &orignal_state);
 
@@ -162,15 +163,19 @@ int main()
         char single_char;
         char *tok_cmds[300];                             //these commands are tokenized only
         char *parsed_cmds[300] = {NULL};                // these commands are parsed matlab, [ERROR 4 in diary]
-        
+        pid_t bg_pid;
+        int status;
+
+        while((bg_pid = waitpid(-1, &status, WNOHANG)) > 0)
+        {
+            printf("\n[done] exit pid = %d", bg_pid);
+        }
+         
         char pwd[100];
         if(getcwd(pwd, sizeof(pwd)) != NULL)
         {
             printf("\n\x1b[32mUser@system:%s $\x1b[0m", pwd);
         }
-
-        // fgets(user_input, sizeof(user_input), stdin);
-        // user_input[strcspn(user_input, "\n")] = '\0';
 
         // RAW MODE ======================================================================
         int i = 0;
@@ -219,7 +224,7 @@ int main()
             }
             else
             {   
-                // next node create
+                // next node create || Check march 22 diary entry for info
                 struct cmd_history *temp = NULL;
                 temp = (struct cmd_history *) malloc(sizeof(struct cmd_history));
                 temp->previous = tail;                  // store the prev. node address to new node's prev ptr
@@ -228,17 +233,12 @@ int main()
                 tail->h_cmds = strdup(user_input);      // store the new command in new node
                 tail->next = NULL;   
 
-                // // ERROR 22 in diary ( 22 march )
-                // temp = (struct cmd_history *)malloc(sizeof(struct cmd_history));
-                // tail->next = temp;    
-                // temp->previous = tail;
-                // tail = temp;
 
             }
             navptr = tail;
         }
 
-        // add spaces before and after pipe |
+        // add spaces before and after pipe 
         int buffer_idx = 0;
         char buffer[300];
         for(int user_idx =0; user_input[user_idx] != '\0' ; user_idx++)

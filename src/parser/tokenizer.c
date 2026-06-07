@@ -102,6 +102,24 @@ void tokenize(char *user_input, char * tok_cmds[])
             }
             
         }
+        else if(user_input[i] == '&')
+        {
+            if(word_idx > 0)                            // flush the buffer
+            {
+                buffer[word_idx] = '\0';
+                tok_cmds[token_idx] = strdup(buffer);
+                word_idx = 0;
+                token_idx++;
+            }
+
+            char temp[2];
+            temp[0] = '&';
+            temp[1] = '\0';
+            tok_cmds[token_idx] = strdup(temp);
+            token_idx++;
+            i++;
+                
+        }
         else
         {
             buffer[word_idx] = user_input[i];
