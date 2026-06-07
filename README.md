@@ -61,10 +61,10 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 <img src="images/display2.png" alt="Window2" width="500"/>
 <br>
 
-<img src="images/display3.jpg" alt="Window3" width="500"/>
+<img src="images/display3.png" alt="Window3" width="500"/>
 <br>
 
-<img src="images/display4.jpg" alt="Window4" width="500"/>
+<img src="images/display4.png" alt="Window4" width="500"/>
 
 
 ## See detailed documentation here:  
