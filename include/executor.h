@@ -5,5 +5,4 @@
 
 void execute_command(Command *cmd, int cmd_count);
 
-
 #endif

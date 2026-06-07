@@ -11,6 +11,7 @@ typedef struct{
     SimpleCommand simpleCommands [10];  // like we did before commands[10][50]
     char *inputfile;
     char *outputfile;
+    int bg_status;                      // & : 0 -> false, 1 -> true
 } Command ;
 
 void free_command_mem(Command *cmd);
