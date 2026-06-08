@@ -168,7 +168,7 @@ int main()
 
         while((bg_pid = waitpid(-1, &status, WNOHANG)) > 0)
         {
-            printf("\n[done] exit pid = %d", bg_pid);
+            printf("\n\033[33m[done] exit pid = %d\033[0m", bg_pid);
         }
          
         char pwd[100];
