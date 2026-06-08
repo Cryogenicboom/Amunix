@@ -16,6 +16,9 @@
 ### Another open shell in this open source world. A hobby project of mine.
 <br>
 
+go to [Guide](docs/Guide.md) and [Architecture](docs/ARCHITECTURE.md) to get going and skip the introduction below.
+<br>
+
 <p> 
 I used to procrastinate learning C, it was boring watching tutorials, reading manuels i don't understand the content, i wanted a reason to learn, and that's why i decided to get my hands dirty. But why shell? Because shell is an interface that provides utilities to interact with the OS directly. You might wonder what actually happens when you type your commands on screen, how does it detect keyboard input, how does it know where to output? How can you detect an up arrow key when your command registers input with enter key ?
 
@@ -72,6 +75,7 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 [Basic Architecture](ARCHITECTURE.md)
 <br>
 
+[GUIDE]{docs/Guide.md}
 
 ## Command List for AMUNIX ( still adding )
 <br>
