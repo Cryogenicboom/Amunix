@@ -15,7 +15,6 @@ void execute_command(Command *cmd, int cmd_count)
     // int fdin = 0;   // intial command is read from keyboard "stdin". fdin will be updated to track which input should next command read from.
     int fdin;          // fd where current command read from
 
-
     if(cmd->inputfile != NULL)
     {
         fdin = open(cmd->inputfile, O_RDONLY);
@@ -42,7 +41,6 @@ void execute_command(Command *cmd, int cmd_count)
             if(pid == 0)                    // fork return 0 if child is successfully created
             {   
                 setpgid(pid, 0);            // change child's process group
-
                 dup2(fdin, 0);
                 close(fdin);
 
@@ -81,7 +79,29 @@ void execute_command(Command *cmd, int cmd_count)
                 {
                     tcsetpgrp(STDIN_FILENO, pid);               // parents makes child foreground groupm
                 }
-
+                else if(cmd->bg_status == 1)
+                {   
+                    int space_found = 0;
+                    for(int i =0; i < 20; i++)
+                    {
+                        if(job_tble[i].status == 0)
+                        {
+                            job_tble[i].pid = pid;
+                            job_tble[i].gid = pid;             // child ka gid is same as pid 
+                            job_tble[i].status = 1;
+                            job_tble[i].job_id = job_number;
+                            job_number++;
+                            space_found = 1;
+                            break;
+                        }
+                       
+                    }
+                    if(space_found == 0)
+                    {
+                        printf("\n\033[31mJob table overflow, limit 20 reached");
+                    }
+                }
+                
                 close(fdin);
                 if(i < cmd_count-1)
                 {
@@ -92,7 +112,6 @@ void execute_command(Command *cmd, int cmd_count)
             else
             {
                 perror("error, fork failed");
-
             }
         }
         

@@ -18,17 +18,19 @@ struct termios orignal_state;
 struct termios raw_state;
 
 struct cmd_history
-    {
-        char *h_cmds;
-        struct cmd_history *next;
-        struct cmd_history *previous;
-    };
-    
+{
+    char *h_cmds;
+    struct cmd_history *next;
+    struct cmd_history *previous;
+};
+
+// Job table 
+Jobs job_tble[20];
+int job_number = 1;
+
 // history command head
 struct cmd_history *head = NULL;
 struct cmd_history *tail = NULL;
-
-    
 
 void header(){  
 
@@ -155,7 +157,11 @@ int main()
 
     struct cmd_history *navptr = tail;                // pointer to navigate the history array
 
-    // tail = head;
+    // initial status of all array slots  = 0
+    for(int i = 0; i < 20; i++)
+    {
+        job_tble[i].status = 0;
+    }
 
     while(1)
     {
@@ -166,9 +172,18 @@ int main()
         pid_t bg_pid;
         int status;
 
+        // Background process check and terminates
         while((bg_pid = waitpid(-1, &status, WNOHANG)) > 0)
         {
             printf("\n\033[33m[done] exit pid = %d\033[0m", bg_pid);
+            for(int i = 0; i <20; i++)
+            {
+                if(job_tble[i].pid == bg_pid)
+                {
+                    job_tble[i].status = 0;
+                    break;
+                }
+            } 
         }
          
         char pwd[100];
