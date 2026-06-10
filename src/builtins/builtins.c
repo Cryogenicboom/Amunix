@@ -6,6 +6,7 @@
 #include <unistd.h>             // used for system calls POSIX 
 #include <sys/wait.h>
 #include <pwd.h>
+#include "command.h"
 
 int built_ins(char *parsed_cmds[])
 {
@@ -45,6 +46,18 @@ int built_ins(char *parsed_cmds[])
         {
             perror("getpwuid");
             return 1;
+        }
+        return 0;
+    }
+
+    else if(strcmp(parsed_cmds[0], "jobs") == 0)
+    {
+        for(int i = 0; i < 20; i++)
+        {
+            if(job_tble[i].status == 1)
+            {
+                printf("\n%-10d %-10d %-10d",job_tble[i].job_id, job_tble[i].pid, job_tble[i].gid);
+            }
         }
         return 0;
     }
