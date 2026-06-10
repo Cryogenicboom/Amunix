@@ -16,7 +16,7 @@
 ### Another open shell in this open source world. A hobby project of mine.
 <br>
 
-go to [Guide](docs/Guide.md) and [Architecture](docs/ARCHITECTURE.md) to get going and skip the introduction below.
+go to [Guide](#see-detailed-documentation-here) to get going and skip the introduction below.
 <br>
 
 <p> 
@@ -75,7 +75,7 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 [Basic Architecture](ARCHITECTURE.md)
 <br>
 
-[GUIDE]{docs/Guide.md}
+[Part0]{docs/Part0.md}
 
 ## Command List for AMUNIX ( still adding )
 <br>
