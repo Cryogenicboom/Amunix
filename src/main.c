@@ -226,6 +226,11 @@ int main()
         putchar('\n');
         user_input[i] = '\0';
 
+        if(dog_flag == 1)
+        {
+            system("mpg123 -q images/Bark.mp3 > /dev/null 2>&1 &");
+        }
+
         if(strlen(user_input) != 0)
         {
             // "if block "only runs at start, when tail = head

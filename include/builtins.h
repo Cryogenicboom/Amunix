@@ -2,6 +2,6 @@
 #define BUILT_INS 
 
 int built_ins(char *parsed_cmds[]);
-
+extern int dog_flag;
 
 #endif 

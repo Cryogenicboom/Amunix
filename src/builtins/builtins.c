@@ -8,6 +8,8 @@
 #include <pwd.h>
 #include "command.h"
 
+int dog_flag = 0;
+
 int built_ins(char *parsed_cmds[])
 {
 
@@ -60,6 +62,26 @@ int built_ins(char *parsed_cmds[])
             }
         }
         return 0;
+    }
+    else if(strcmp(parsed_cmds[0], "dog") == 0)
+    {
+        if(strcmp(parsed_cmds[1], "-e") == 0)
+        {
+            dog_flag = 1;
+            system("mpg123 -q images/Bark.mp3 > /dev/null 2>&1 &");
+            return 0;
+        }
+        else if(strcmp(parsed_cmds[1], "-d") ==0)
+        {
+            dog_flag = 0;
+            system("mpg123 -q images/yelp.mp3 > /dev/null 2>&1 &");
+            return 0;
+        }
+        else
+        {
+            printf("\nError No arguments defined. Type 'help' for help which do not works\n");
+            return 1;
+        }
     }
     else
     {
