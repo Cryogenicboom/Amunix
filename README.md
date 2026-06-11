@@ -88,6 +88,8 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 | Greet shell     | `Hello`                    | Greet the shell, it's a good habit     |
 | who are you?    | `whoru`                    | Sometimes you want to make shell feel known |
 | History         | `up arrow key / down arrow key` | prints the previous commands executed |
+| Job Table       | `jobs`                     | Prints out running background process      |
+| Dog Sound       | `dog -e` to enable and `dog -d` to disable | Produces a bark sound at each enter key |
 
 ### SYSTEM COMMAND
 | Feature            | Syntax Example              | Description |
@@ -105,7 +107,7 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 | Command Count Tracking   | (internal)                 | Counts number of piped commands for execution logic |
 | Argument Structuring     | (internal)                 | Stores commands as `commands[10][50]` (2D array) |
 | > (Overwrite Output)     | `ls > file.txt`            | Sends standard output to a file, creating it if it doesn't exist or overwriting existing content.|
-| < (Input Redirection)    |  `wc -l << file.txt`       | Reads input for a command from a file instead of the keyboard.|
+| < (Input Redirection)    |  `wc -l < file.txt`       | Reads input for a command from a file instead of the keyboard.|
 
 ### TOKENIZATION FEATURES
 | Feature                | Syntax Example              | Description |
@@ -118,5 +120,6 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 | Limitation            | Current status      |
 |----------------------|----------------------|
 | Append               | Not implemented `>>` |
+| Job table            | Implemented          |
 | fg and bg Job control| in development       |
-| strtok() tokenization| removed, manuallt tokenizing now |
+| strtok() tokenization| removed, manually tokenizing now |
