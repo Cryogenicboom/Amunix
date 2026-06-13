@@ -9,7 +9,7 @@
   o88o     o8888o o8o        o888o    `YbodP'      o8o      88888o  o888o oo888o  o88888o 
 ```
 
-###### Yes this ASCII title was way harder than making the Shell.
+######          Yes this ASCII title was way harder than making the Shell.
 
 --- 
 
@@ -23,7 +23,6 @@ go to [Guide](#see-detailed-documentation-here) to get going and skip the introd
 I used to procrastinate learning C, it was boring watching tutorials, reading manuels i don't understand the content, i wanted a reason to learn, and that's why i decided to get my hands dirty. But why shell? Because shell is an interface that provides utilities to interact with the OS directly. You might wonder what actually happens when you type your commands on screen, how does it detect keyboard input, how does it know where to output? How can you detect an up arrow key when your command registers input with enter key ?
 
 That's how AMUNIX can help you too study "how a shell operates at base level". AMUNIX is your tool, study it if you want to understand what happens between your keypress and OS. 
-To learn about the working and internal structure you can refer to [Architecture.md](https://github.com/Cryogenicboom/Amunix/blob/main/ARCHITECTURE.md) 
 </p>
 
 <br>
@@ -35,13 +34,10 @@ Shell is a CLI (Command Line Interface) that acts as an interface for an Operati
 
 ## Why AMUNIX? 
 <p>
-I know there exist professional shells already. I built AMUNIX as a curiosity driven project. I was studying   [OSTEP]("https://pages.cs.wisc.edu/~remzi/OSTEP/"), this book ignited the spark in me to understand computers at fundamentals. I thought "why not learn by doing?". I hope that this shell will also help other curious minds to understand the shell development. 
+I know there exist professional shells already. I built AMUNIX as a curiosity driven project. I was studying    OSTEP (https://pages.cs.wisc.edu/~remzi/OSTEP/), this book ignited the spark in me to understand computers at fundamentals. I thought "why not learn by doing?". I hope that this shell will also help other curious minds to understand the shell development. 
 </p>
 
-> use [Valgrind](https://valgrind.org/) to debug and check for mem leaks.
-
-
-## Installing the shell
+## Installing the shell ( Run the below commands in WSL )
 1. clone the shell 
 > git clone https://github.com/Cryogenicboom/Amunix.git
 > <br>
@@ -58,24 +54,24 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 > make run
 
 ## Run Time images 
-<img src="images/display1.png" alt="Window" width="500"/>
+<img src="Media/display1.png" alt="Window" width="500"/>
 <br>
 
-<img src="images/display2.png" alt="Window2" width="500"/>
+<img src="Media/display2.png" alt="Window2" width="500"/>
 <br>
 
-<img src="images/display3.png" alt="Window3" width="500"/>
+<img src="Media/display3.png" alt="Window3" width="500"/>
 <br>
 
-<img src="images/display4.png" alt="Window4" width="500"/>
+<img src="Media/display4.png" alt="Window4" width="500"/>
 
 
 ## See detailed documentation here:  
 
-[Basic Architecture](ARCHITECTURE.md)
+[Basic Architecture](docs/ARCHITECTURE.md)
 <br>
 
-[Part0]{docs/Part0.md}
+[Part0](docs/Part0.md)
 
 ## Command List for AMUNIX ( still adding )
 <br>
