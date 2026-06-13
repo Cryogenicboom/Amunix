@@ -228,7 +228,7 @@ int main()
 
         if(dog_flag == 1)
         {
-            system("mpg123 -q images/Bark.mp3 > /dev/null 2>&1 &");
+            system(system_arg);
         }
 
         if(strlen(user_input) != 0)

@@ -7,8 +7,14 @@
 #include <sys/wait.h>
 #include <pwd.h>
 #include "command.h"
+#include <libgen.h>
+#define PATH_MAX 4095
 
+char path[PATH_MAX];
+char system_arg[PATH_MAX+50];
 int dog_flag = 0;
+
+// char buf[PATH_MAX];
 
 int built_ins(char *parsed_cmds[])
 {
@@ -22,16 +28,19 @@ int built_ins(char *parsed_cmds[])
         }
         return 0;
     }
+
     else if (strcmp(parsed_cmds[0], "bahar") == 0)
     {
         exit(EXIT_SUCCESS);
     }
+
     else if (strcmp(parsed_cmds[0], "whoru") == 0)
     {
         
         printf("\ni am a shell who helps you interact with your Operating system and helps with using your system. Name is AMUNIX, idk what it means but thanks for asking!");
         return 0;
     }
+
     else if(strcmp(parsed_cmds[0], "Hello") == 0)
     {
         struct passwd *pw;
@@ -63,18 +72,31 @@ int built_ins(char *parsed_cmds[])
         }
         return 0;
     }
+
     else if(strcmp(parsed_cmds[0], "dog") == 0)
     {
+
+        char *buf;
+        readlink("/proc/self/exe", path, PATH_MAX);
+        buf = dirname(path);
+
+        char * dog_in = "/Media/Bark.mp3";
+        char * dog_out = "/Media/yelp.mp3";
+
         if(strcmp(parsed_cmds[1], "-e") == 0)
         {
             dog_flag = 1;
-            system("mpg123 -q images/Bark.mp3 > /dev/null 2>&1 &");
+            strcat(buf, dog_in);
+            snprintf(system_arg, sizeof(system_arg), "mpg123 -q %s > /dev/null 2>&1 &", buf);
+            system(system_arg);
             return 0;
         }
         else if(strcmp(parsed_cmds[1], "-d") ==0)
         {
             dog_flag = 0;
-            system("mpg123 -q images/yelp.mp3 > /dev/null 2>&1 &");
+            strcat(buf, dog_out);
+            snprintf(system_arg, sizeof(system_arg), "mpg123 -q %s > /dev/null 2>&1 &", buf);
+            system(system_arg);
             return 0;
         }
         else
@@ -83,6 +105,7 @@ int built_ins(char *parsed_cmds[])
             return 1;
         }
     }
+
     else
     {
         return 1;
