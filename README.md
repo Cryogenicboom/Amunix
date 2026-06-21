@@ -16,7 +16,14 @@
 ### Another open shell in this open source world. A hobby project of mine.
 <br>
 
-go to [Guide](#see-detailed-documentation-here) to get going and skip the introduction below.
+## Content:
+1. [Introduction](#what-is-shell)
+2. [Install Amunix](#installing-the-shell--run-the-below-commands-in-wsl-)
+3. [Images](#run-time-images)
+4. [Amunix Commands](#command-list-for-amunix--still-adding-)
+5. [Guide](docs/Part0.md) to help you build your own shell.
+6. [Basic Architecture](docs/ARCHITECTURE.md)
+7. [Current Limitations](#limitations)
 <br>
 
 <p> 
@@ -66,12 +73,7 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 <img src="Media/display4.png" alt="Window4" width="500"/>
 
 
-## See detailed documentation here:  
 
-[Basic Architecture](docs/ARCHITECTURE.md)
-<br>
-
-[Part0](docs/Part0.md)
 
 ## Command List for AMUNIX ( still adding )
 <br>
