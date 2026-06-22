@@ -139,7 +139,8 @@ int main()
 {
     header();
     signal(SIGTTOU, SIG_IGN);
-    
+    signal(SIGINT, SIG_IGN);                    // ignore the shell crtl+c interrupt
+
     // struct termios orignal_state;
     tcgetattr(STDIN_FILENO, &orignal_state);
 
@@ -162,6 +163,20 @@ int main()
     {
         job_tble[i].status = 0;
     }
+
+    // fetch username and system name
+    char *username;
+    if(getlogin() != NULL)
+    {
+        username = strdup(getlogin());              // getlogin returns pointer which will be hold by username pointer
+    }
+    else if(getlogin() == NULL)
+    {
+        username = strdup("Guest");
+    }
+    
+    char sys_name[_SC_HOST_NAME_MAX];
+    gethostname(sys_name, sizeof(sys_name));
 
     while(1)
     {
@@ -187,18 +202,22 @@ int main()
         }
          
         char pwd[100];
+        char prompt[512];
         if(getcwd(pwd, sizeof(pwd)) != NULL)
         {
-            printf("\n\x1b[32mUser@system:%s $\x1b[0m", pwd);
+            snprintf(prompt, sizeof(prompt), "%s@%s:%s $", username, sys_name, pwd);
+            printf("\n\x1b[32m%s\x1b[0m", prompt);
         }
 
         // RAW MODE ======================================================================
         int i = 0;
+        // int prompt_len = strlen(prompt);
         single_char = getchar();
 
         while(single_char != '\n')
         {
             // printf("(%d)", single_char);
+
             if(single_char == 27)
             {   
                 int temp = arrow_keys(single_char, user_input, tail, head, i, &navptr);
@@ -213,12 +232,15 @@ int main()
                 i--;
             }
             else
-            {
-                putchar(single_char);
-                user_input[i] = single_char;
-                
-                fflush(stdout);                      // Notes in diary( 14 march).
-                i++ ;
+            {   
+                if(single_char != 127)
+                {
+                    putchar(single_char);
+                    user_input[i] = single_char;
+                    
+                    fflush(stdout);                      // Notes in diary( 14 march).
+                    i++ ;
+                }
             }
             single_char = getchar();
 
@@ -346,6 +368,6 @@ int main()
         }
 
     }
-
+    free(username);
     return 0;
 }   
