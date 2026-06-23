@@ -88,6 +88,8 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 | History         | `up arrow key / down arrow key` | prints the previous commands executed |
 | Job Table       | `jobs`                     | Prints out running background process      |
 | Dog Sound       | `dog -e` to enable and `dog -d` to disable | Produces a bark sound at each enter key |
+| Foreground Job  | `fg [job number]`          | Bring background jobs to foreground and run it in shell | 
+| Background Job  | `bg `                      | resumes a suspended process in background               |
 
 ### SYSTEM COMMAND
 | Feature            | Syntax Example              | Description |
@@ -119,5 +121,6 @@ I know there exist professional shells already. I built AMUNIX as a curiosity dr
 |----------------------|----------------------|
 | Append               | Not implemented `>>` |
 | Job table            | Implemented          |
-| fg and bg Job control| in development       |
-| strtok() tokenization| removed, manually tokenizing now |
+| Job table is limited to 20 jobs only.|      |
+| fg and bg Job control| Implemented          |
+| strtok() | removed, manually tokenizing now |
