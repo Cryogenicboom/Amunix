@@ -8,12 +8,15 @@
 #include <pwd.h>
 #include "command.h"
 #include <libgen.h>
+#include <termio.h>
+#include <signal.h>
+
 #define PATH_MAX 4095
 
 char path[PATH_MAX];
 char system_arg[PATH_MAX+50];
 int dog_flag = 0;
-
+pid_t fg_gid;
 // char buf[PATH_MAX];
 
 int built_ins(char *parsed_cmds[])
@@ -106,6 +109,45 @@ int built_ins(char *parsed_cmds[])
         }
     }
 
+    else if(strcmp(parsed_cmds[0], "fg") == 0)
+    {
+        int status;
+        if(parsed_cmds[1] != NULL)
+        {
+            int target = atoi(parsed_cmds[1]);
+            for(int i = 0; i < 20; i++)
+            {
+                if(job_tble[i].job_id == target && job_tble[i].status == 1)
+                {
+                    fg_gid = job_tble[i].gid;
+                    job_tble[i].status = 0;
+                    break;
+                }
+            }
+
+            tcsetpgrp(STDIN_FILENO, fg_gid);
+            waitpid(fg_gid, &status, WUNTRACED);
+            tcsetpgrp(STDIN_FILENO, getpgrp());
+        }
+        return 0;
+    }
+    
+    else if(strcmp(parsed_cmds[0], "bg") == 0)
+    {
+        if(parsed_cmds[1] != NULL)
+        {
+            int target = atoi(parsed_cmds[1]);
+            for(int i = 0; i < 20; i++)
+            {
+                if(job_tble[i].job_id == target && job_tble[i].status == 1)
+                {
+                    kill(-job_tble[i].gid, SIGCONT);
+                    break;
+                }
+            }
+        }
+        return 0;
+    }
     else
     {
         return 1;
