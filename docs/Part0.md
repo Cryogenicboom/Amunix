@@ -101,8 +101,11 @@ __I would not like to spoonfeed you, hence you should use this material as a gui
 
 <br>
 
+#### That's it you got the intuition, see you in the next part with lexical analysis.
 __NEXT PARTS__:
 [Part1](docs/Part1.md)
+<br>
+
 [PART2]()
 
 

@@ -1,4 +1,4 @@
-This is documentation for AMUNIX covers architecture and working. For installation refer to the [README.md](README.md) here.
+This is documentation for AMUNIX covers architecture and working. For installation refer to the [README.md](README.md) here. To Build your own shell refer [Guide](docs/Part0).
 
 ```
         .o.       ooo        ooooo ooooo     ooo  oooo        oooo  ooooo ooooooo  ooooo
@@ -9,20 +9,7 @@ This is documentation for AMUNIX covers architecture and working. For installati
    .8'     `888.   8    Y     888   `88.    .8'     8    Y888 .88    888     d8'  `888b
   o88o     o8888o o8o        o888o    `YbodP'      o8o      88888o  o888o oo888o  o88888o 
 ```
-<br>
-
-#### Yes this ASCII title was way harder than making the Shell.
 <br> 
-
-## What is Shell?
-<p>
-Shell is a CLI (Command Line Interface) that acts as an interface for an Operating System. Shell enables user to interact with kernal. it provides user with commands, execute programmes for them and manages Input and Output functionality. 
-</p>
-
-## Why AMUNIX? 
-<p>
-I know there exist professional shells already. I built AMUNIX as a curiosity driven project. I was studying [OSTEP](https://pages.cs.wisc.edu/~remzi/OSTEP/) , this book ignited the spark in me to understand computers at fundamentals. I thought "why not learn by doing?". I hope that this shell will also help other curious minds to understand the shell development. 
-</p>
 
 # ARCHITECTURE 
 Shell is divided into 4 parts: 
@@ -40,7 +27,7 @@ Shell is divided into 4 parts:
 - each command after tokenized should end with a `\0` NULL terminater, it is important because we will be using `exec()` to execute the exeternal commands. 
 
 ### Flowchart (will be updated as devlopment progress)
-<img src="images/Untitled.jpg" alt="Window3" width="600"/>
+<img src="docs/Untitled.jpg" alt="Window3" width="600"/>
 
 
 ## 0.0 RAW MODE: 
@@ -117,4 +104,8 @@ For arguments like `"Directory name with spaces"` they are divided into tokens, 
 ## 3.0 Executor: 
 this module does the actual work of implementing the commands. It uses system calls to do so. After parsing the commands are passed for execution, where they are executed using `exec()` family of commands. Note that only external commands are handled by our executor meaning, whatever commands are passed here, they are stored in your system's files, we are just calling them with appropriate arguments. 
 <br> 
+
 BuiltIns commands are handled differently by other system calls.
+<br>
+
+Executor is responsible for managing child's gid and manage foreground process. It grants child process group ( different than parent's gid ) foreground job unless `&` is mentioned explicitly. 
