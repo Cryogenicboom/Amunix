@@ -27,7 +27,8 @@ Shell is divided into 4 parts:
 - each command after tokenized should end with a `\0` NULL terminater, it is important because we will be using `exec()` to execute the exeternal commands. 
 
 ### Flowchart (will be updated as devlopment progress)
-<img src="docs/Untitled.jpg" alt="Window3" width="600"/>
+
+<img src="docs_med/flowchart.jpg" alt="Window5" width="600"/>
 
 
 ## 0.0 RAW MODE: 
