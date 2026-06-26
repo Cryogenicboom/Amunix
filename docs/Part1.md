@@ -111,9 +111,10 @@ else if(user_input[i] == '|' ||
 
 - The moment one of these characters is encountered, we stop building the current word. For example,
 
-> echo>file.txt 
-> <br>
->     ^
+```text
+echo>file.txt 
+    ^
+```
 
 - Notice that there isn't even a space between echo and >. But a beginner malike us may think that the tokenizer will produce
 ` [ "echo>file.txt" ] ` 
@@ -187,9 +188,10 @@ printf("\nsorry user but this command is still in development\n");
 
 There are no spaces, no pipe, no redirections. The loop reaches the null terminator directly.
 
-> pwd\0
-> <br>
->    ^
+```text
+pwd\0
+   ^
+```
 <br>
 
 - At this point, Buffer : [ pwd ] still contains the last word. Since no delimiter appeared after "pwd", buffer never gets flushed in the loop.
