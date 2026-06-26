@@ -111,7 +111,8 @@ else if(user_input[i] == '|' ||
 
 - The moment one of these characters is encountered, we stop building the current word. For example,
 
-> echo>file.txt
+> echo>file.txt 
+> <br>
 >     ^
 
 - Notice that there isn't even a space between echo and >. But a beginner malike us may think that the tokenizer will produce
@@ -138,12 +139,12 @@ temp[1] = '\0';
 tok_cmds[token_idx] = strdup(temp);
 ```
 
-- The resulting token array becomes [ "ls", "\0" ] [ "|", "\0" ] instead of ["ls|"]. The same logic is used for <, >, &. since all of them are single-character operators.
+- The resulting token array becomes [ "ls", "\0" ] [ "|", "\0" ] instead of [ "ls|" ]. The same logic is used for <, >, &. since all of them are single-character operators.
 
 ### 1.5 : Looking Ahead (Check the next character)  [ parser/tokenizer.c / void tokenize() ]
 
-- Some shell operators are made of two characters instead of one. For example, >>. If our tokenizer immediately stored the first ` > ` : ` ["echo"] [">"] [">"] `. that would be incorrect.
-The shell expects ` ["echo"] [">>"] ` instead.
+- Some shell operators are made of two characters instead of one. For example, >>. If our tokenizer immediately stored the first ` > ` : ` [ "echo" ] [ ">" ] [ ">" ] `. that would be incorrect.
+The shell expects ` [ "echo" ] [ ">>" ] ` instead.
 
 - So before storing >, we quickly peek at the next character.
 
@@ -187,6 +188,7 @@ printf("\nsorry user but this command is still in development\n");
 There are no spaces, no pipe, no redirections. The loop reaches the null terminator directly.
 
 > pwd\0
+> <br>
 >    ^
 <br>
 
@@ -201,6 +203,9 @@ if(word_idx > 0)
 
 - This final check ensures that the last token is never lost, regardless of how the command ends.
 
+<br>
+
+That's it see you at the Parsing. Sorry for the grammatical mistakes, Feel free to raise issues regarding the project. 
 <br>
 
 Next Parts : 
