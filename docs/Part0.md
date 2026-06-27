@@ -1,7 +1,7 @@
-Welcome to the AMUNIX guide. This guide will trace all the functions, files, concepts to help you build your own shell. Reminder, this is a basic shell prototype covering Lexical analysis, Parsing, C libs, Raw Mode, Jobs, Pipes, File redirection, Memory cleanup, Makefile. Enjoy the process 
+Welcome to the AMUNIX Tutorial. This Tutorial will trace all the functions, files, concepts to help you build your own shell. Reminder, this is a basic shell prototype covering Lexical analysis, Parsing, C libs, Raw Mode, Jobs, Pipes, File redirection, Memory cleanup, Makefile. Enjoy the process 
 <br>
 
-__I would not like to spoonfeed you, hence you should use this material as a guide. This will help you avoid wasting time googling the stuff. But syntax, definations, use-case, that's what you have to do. They say "RTFM".__
+__I would not like to spoonfeed you, hence you should use this material as a guide. This will help you avoid wasting time googling the stuff. But syntax, definations, use-case, that's what you have to do. You know They say "RTFM".__
 
 <br>
 
