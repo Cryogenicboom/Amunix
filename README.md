@@ -21,7 +21,7 @@
 2. [Install Amunix](#installing-the-shell--run-the-below-commands-in-wsl-)
 3. [Images](#run-time-images)
 4. [Amunix Commands](#command-list-for-amunix--still-adding-)
-5. [Guide](docs/Part0.md) to help you build your own shell.
+5. [Tutorial](docs/Part0.md) to help you build your own shell.
 6. [Basic Architecture](docs/ARCHITECTURE.md)
 7. [Current Limitations](#limitations)
 <br>
@@ -32,6 +32,7 @@ I used to procrastinate learning C, it was boring watching tutorials, reading ma
 That's how AMUNIX can help you too study "how a shell operates at base level". AMUNIX is your tool, study it if you want to understand what happens between your keypress and OS. 
 </p>
 
+Refer the [Tutorial](docs/Part0.md) to build your own shell.
 <br>
 
 ## What is Shell?
