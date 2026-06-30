@@ -282,7 +282,7 @@ The parser only becomes interesting when it encounters a special token like ` | 
 - That's exactly what we'll look at in the next section when we handle pipes.
 
 
-__NOTE : Jump to [Pipes and FD table](PipeFD.md) to understand pipes and File descriptors. Else continue...__
+__NOTE : You will learn Pipes and FD table in PART-3, just know what is pipe.__
 
 ### 2.5 : Handling Pipes [ parser/parser.c / void parse_struct() ]
 
