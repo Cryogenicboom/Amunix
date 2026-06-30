@@ -213,4 +213,4 @@ That's it see you at the Parsing. Sorry for the grammatical mistakes, Feel free 
 Next Parts : 
 <br>
 
-[PART2](Part2.md)
+[PART2](Part2.md) || [PART3](Part3.md)

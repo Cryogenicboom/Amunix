@@ -1,4 +1,4 @@
-Previous Parts : [PART 0](Part0.md)      [PART 1](Part1.md)
+Previous Parts : [PART 0](Part0.md) || [PART 1](Part1.md)
 
 # PART 2 : PARSING 
 

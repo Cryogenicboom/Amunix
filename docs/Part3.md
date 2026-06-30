@@ -614,4 +614,4 @@ And as usual, if you found any mistakes or my 2 AM dumb writing confuses you, fe
 Happy hacking, and see you in the next project. 
 <br>
 
-Previous Parts [Part0](Part0.md) || [Part1](Part0.md) || [Part2](Part0.md)
+Previous Parts [Part0](Part0.md) || [Part1](Part1.md) || [Part2](Part2.md)
