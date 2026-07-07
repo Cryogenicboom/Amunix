@@ -178,6 +178,8 @@ int main()
     char sys_name[_SC_HOST_NAME_MAX];
     gethostname(sys_name, sizeof(sys_name));
 
+    char sound[4];
+
     while(1)
     {
         char user_input[100];
@@ -196,16 +198,29 @@ int main()
                 if(job_tble[i].pid == bg_pid)
                 {
                     job_tble[i].status = 0;
+                    job_number--;
+                    printf("job_num: %d\n", job_number);
                     break;
                 }
             } 
         }
-         
+        
+        if(dog_flag == 1)
+        {
+            strcpy(sound, "ON");
+        }
+        else if(dog_flag == 0)
+        {
+            strcpy(sound, "OFF");
+        }
+
+
         char pwd[100];
         char prompt[512];
         if(getcwd(pwd, sizeof(pwd)) != NULL)
         {
             snprintf(prompt, sizeof(prompt), "%s@%s:%s $", username, sys_name, pwd);
+            printf("\n\x1b[38;5;250mJobs: %d, Sound: %s\e[0m", job_number, sound);
             printf("\n\x1b[32m%s\x1b[0m", prompt);
         }
 
