@@ -15,7 +15,7 @@
 
 char path[PATH_MAX];
 char system_arg[PATH_MAX+50];
-int dog_flag = 0;
+int dog_flag = 0;               // 0: off, 1: on
 pid_t fg_gid;
 // char buf[PATH_MAX];
 
