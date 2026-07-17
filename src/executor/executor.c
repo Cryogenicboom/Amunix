@@ -6,7 +6,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include "command.h"
-#include <termio.h>
+#include <termios.h>
 #include "executor.h"
 
 

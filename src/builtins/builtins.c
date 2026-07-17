@@ -8,7 +8,7 @@
 #include <pwd.h>
 #include "command.h"
 #include <libgen.h>
-#include <termio.h>
+#include <termios.h>
 #include <signal.h>
 
 #define PATH_MAX 4095
