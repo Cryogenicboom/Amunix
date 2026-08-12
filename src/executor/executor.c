@@ -92,6 +92,7 @@ void execute_command(Command *cmd, int cmd_count)
                             job_tble[i].status = 1;
                             job_tble[i].job_id = job_number;
                             job_number++;
+                            active_jobs++;
                             space_found = 1;
                             break;
                         }

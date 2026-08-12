@@ -27,6 +27,7 @@ struct cmd_history
 // Job table 
 Jobs job_tble[20];
 int job_number = 1;
+int active_jobs = 0;
 
 // history command head
 struct cmd_history *head = NULL;
@@ -198,7 +199,8 @@ int main()
                 if(job_tble[i].pid == bg_pid)
                 {
                     job_tble[i].status = 0;
-                    job_number--;
+                    active_jobs--;
+                    // job_number--;
                     printf("job_num: %d\n", job_number);
                     break;
                 }
@@ -220,7 +222,7 @@ int main()
         if(getcwd(pwd, sizeof(pwd)) != NULL)
         {
             snprintf(prompt, sizeof(prompt), "%s@%s:%s $", username, sys_name, pwd);
-            printf("\n\x1b[38;5;250mJobs: %d, Sound: %s\e[0m", job_number, sound);
+            printf("\n\x1b[38;5;250mJobs: %d, Sound: %s\e[0m", active_jobs, sound);
             printf("\n\x1b[32m%s\x1b[0m", prompt);
         }
 

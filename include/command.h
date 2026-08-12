@@ -29,4 +29,6 @@ typedef struct
 extern Jobs job_tble[20];
 extern int job_number;
 
+extern int active_jobs;
+
 #endif
